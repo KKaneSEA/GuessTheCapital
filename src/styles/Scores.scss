@@ -1,0 +1,29 @@
+@import "Body";
+
+.App-count-container {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  padding-left: 5rem;
+  background-color: $greenbackground;
+}
+
+.App-count {
+  font-family: "Sono", sans-serif;
+  font-weight: 300;
+  font-size: 3rem;
+  display: flex;
+  align-items: center;
+  justify-content: flex-start;
+  margin: 0;
+}
+
+.App-reset-container {
+}
+
+.App-button-reset {
+  font-family: "Sono", sans-serif;
+  font-weight: 300;
+  font-size: 1rem;
+  margin-top: 1rem;
+}

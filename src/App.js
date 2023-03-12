@@ -1,7 +1,11 @@
 import { useState } from "react";
-import "./App.css";
+//import "./App.css";
 import Test from "./Test";
 import GetAPI from "./GetAPI";
+import "./styles/Body.scss";
+import "./styles/Header.scss";
+import "./styles/Scores.scss";
+import "./styles/Main.scss";
 
 function App() {
   const [countRight, setCountRight] = useState(0);
@@ -314,7 +318,7 @@ function App() {
     <div className="App-container">
       {/* <Test countWrong={countWrong} /> */}
       <div className="App-title">
-        <h1>Guess the Capital</h1>
+        <h1>GUESS THE CAPITAL</h1>
       </div>
       <div className="App-count-container">
         <p className="App-count">Right Guesses: {countRight} </p>
@@ -330,38 +334,41 @@ function App() {
         <GetAPI place={theCountry} addCapital={addCapital} />
 
         <div className="App-main-guess">
-          <p>What is the capital of {theCountry}</p>
-          <input
-            type="text"
-            placeholder="guess the Capital..."
-            value={capitalGuess}
-            // name="capitalInput"
-            onChange={handleChange}
-            className="App-guess-input"
-            onKeyDown={(e) => {
-              let x = e.code;
-              if (x === "Enter") {
-                console.log("enter submitted");
-                console.log(capitalGuess);
+          <div className="App-main-guess-question">
+            <p>What is the capital of {theCountry}?</p>
+          </div>
+          <div className="App-main-guess-input">
+            <input
+              type="text"
+              placeholder="guess the Capital..."
+              value={capitalGuess}
+              // name="capitalInput"
+              onChange={handleChange}
+              className="App-guess-input"
+              onKeyDown={(e) => {
+                let x = e.code;
+                if (x === "Enter") {
+                  console.log("enter submitted");
+                  console.log(capitalGuess);
 
+                  handleSubmit();
+                  //handleResetCountry();
+                }
+              }}
+            ></input>
+            <button
+              className="App-guess-button"
+              onClick={(e) => {
                 handleSubmit();
-                //handleResetCountry();
-              }
-            }}
-          ></input>
 
-          <button
-            className="App-guess-button"
-            onClick={(e) => {
-              handleSubmit();
+                // handleResetCountry();
+              }}
 
-              // handleResetCountry();
-            }}
-
-            // onClick={handleSubmit}
-          >
-            Submit
-          </button>
+              // onClick={handleSubmit}
+            >
+              Submit
+            </button>{" "}
+          </div>
         </div>
       </div>
     </div>

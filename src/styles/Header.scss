@@ -1,0 +1,13 @@
+@import "Body";
+
+.App-title {
+  font-family: "Sono", sans-serif;
+  font-weight: 500;
+  font-size: 3rem;
+
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background-color: $greenbackground;
+  padding: 2rem 0;
+}
