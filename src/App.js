@@ -4,8 +4,11 @@ import Test from "./Test";
 import GetAPI from "./GetAPI";
 
 function App() {
-  const [countRight, seCountRight] = useState(22);
-  const [countWrong, seCountWrong] = useState(7757);
+  const [countRight, setCountRight] = useState(0);
+  const [countWrong, setCountWrong] = useState(0);
+  const [capitalGuess, setCapitalGuess] = useState("");
+  const [theCapital, setTheCapital] = useState("");
+  const [theCountry, setTheCountry] = useState("Australia");
 
   let places = [
     "Afghanistan",
@@ -255,29 +258,110 @@ function App() {
     return items[Math.floor(Math.random() * items.length)];
   }
 
-  let getRandomCountry = randomItem(places);
+  let getRandomCountry;
+
+  function addCapital(correctCapital) {
+    setTheCapital(correctCapital);
+
+    // this.setState(
+    //   { friends: [...this.state.friends, newFriend] },
+    //   this.syncLocalStorage
+    // );
+  }
+  function handleResetScores() {
+    setCountRight(0);
+    setCountWrong(0);
+  }
+
+  function handleResetCountry() {
+    let getRandomCountry = randomItem(places);
+    let newCountry = getRandomCountry;
+    console.log(newCountry);
+    setTheCountry(newCountry);
+  }
+
+  function handleChange(evt) {
+    setCapitalGuess(evt.target.value);
+  }
+
+  function test(guess) {
+    console.log(guess);
+
+    setCountRight(countRight + 1);
+  }
+
+  function guessChecker(guess) {
+    console.log("in guess checker");
+    console.log(guess);
+    let guessUppercase = guess.toUpperCase();
+    console.log(guessUppercase);
+    if (guessUppercase === theCapital) setCountRight(countRight + 1);
+    else setCountWrong(countWrong + 1);
+    setCapitalGuess("");
+    handleResetCountry();
+  }
+
+  function handleSubmit(evt) {
+    // evt.preventDefault();
+    if (capitalGuess.length > 1)
+      // test(capitalGuess)
+      guessChecker(capitalGuess);
+    else alert("Input must be at least two characters.");
+    console.log("inHandle Submit");
+  }
 
   return (
     <div className="App-container">
-      <Test countWrong={countWrong} />
+      {/* <Test countWrong={countWrong} /> */}
       <div className="App-title">
         <h1>Guess the Capital</h1>
       </div>
       <div className="App-count-container">
         <p className="App-count">Right Guesses: {countRight} </p>
         <p className="App-count"> Wrong Guesses: {countWrong}</p>
-        <div className="App-fruit-guess">
-          <button>reset scores</button>
+        <div className="App-reset-container">
+          <button className="App-button-reset" onClick={handleResetScores}>
+            reset scores
+          </button>
         </div>
       </div>
 
-      <div className="App-fruit">
-        <div className="App-fruit-timer">timer</div>
-        <div className="App-fruit-picture">
-          <GetAPI place={getRandomCountry} />
-        </div>
-        <div className="App-fruit-guess">
-          <button>Guess</button>
+      <div className="App-main">
+        <GetAPI place={theCountry} addCapital={addCapital} />
+
+        <div className="App-main-guess">
+          <p>What is the capital of {theCountry}</p>
+          <input
+            type="text"
+            placeholder="guess the Capital..."
+            value={capitalGuess}
+            // name="capitalInput"
+            onChange={handleChange}
+            className="App-guess-input"
+            onKeyDown={(e) => {
+              let x = e.code;
+              if (x === "Enter") {
+                console.log("enter submitted");
+                console.log(capitalGuess);
+
+                handleSubmit();
+                //handleResetCountry();
+              }
+            }}
+          ></input>
+
+          <button
+            className="App-guess-button"
+            onClick={(e) => {
+              handleSubmit();
+
+              // handleResetCountry();
+            }}
+
+            // onClick={handleSubmit}
+          >
+            Submit
+          </button>
         </div>
       </div>
     </div>
