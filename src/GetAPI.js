@@ -19,9 +19,11 @@ function GetAPI(props) {
       setCorrectCapital(capitalUppercase);
       //this.setState({ correctCapital: capitalUppercase });
       props.addCapital(capitalUppercase);
+      props.addCapitalNormalCase(capital);
     }
     getData();
   }, [props.place]);
+
   return <div></div>;
 }
 

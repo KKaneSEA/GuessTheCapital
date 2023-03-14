@@ -1,4 +1,4 @@
-import { useState } from "react";
+import { useState, useEffect } from "react";
 //import "./App.css";
 import Test from "./Test";
 import GetAPI from "./GetAPI";
@@ -12,7 +12,11 @@ function App() {
   const [countWrong, setCountWrong] = useState(0);
   const [capitalGuess, setCapitalGuess] = useState("");
   const [theCapital, setTheCapital] = useState("");
+  const [theCapitalNormalCase, setTheCapitalNormalCase] = useState("");
+  const [lastCapitalNormalCase, setLastCapitalNormalCase] = useState("");
   const [theCountry, setTheCountry] = useState("Australia");
+  const [correctAnswer, setCorrectAnswer] = useState(false);
+  const [wrongAnswer, setWrongAnswer] = useState(false);
 
   let places = [
     "Afghanistan",
@@ -272,15 +276,37 @@ function App() {
     //   this.syncLocalStorage
     // );
   }
+
+  function addCapitalNormalCase(capitalNormalCase) {
+    let x = capitalNormalCase;
+    setTheCapitalNormalCase(x);
+  }
+
+  useEffect(() => {
+    function keepCapitalNormalCaseRight(theCapitalNormalCase) {
+      setLastCapitalNormalCase(theCapitalNormalCase);
+    }
+    keepCapitalNormalCaseRight(theCapitalNormalCase);
+  }, [countRight]);
+
+  useEffect(() => {
+    function keepCapitalNormalCaseWrong(theCapitalNormalCase) {
+      setLastCapitalNormalCase(theCapitalNormalCase);
+    }
+    keepCapitalNormalCaseWrong(theCapitalNormalCase);
+  }, [countWrong]);
+
   function handleResetScores() {
     setCountRight(0);
     setCountWrong(0);
+    setCorrectAnswer(false);
+    setWrongAnswer(false);
   }
 
   function handleResetCountry() {
     let getRandomCountry = randomItem(places);
     let newCountry = getRandomCountry;
-    console.log(newCountry);
+
     setTheCountry(newCountry);
   }
 
@@ -288,10 +314,16 @@ function App() {
     setCapitalGuess(evt.target.value);
   }
 
-  function test(guess) {
-    console.log(guess);
-
+  function countRightAdd() {
     setCountRight(countRight + 1);
+    setCorrectAnswer(true);
+    setWrongAnswer(false);
+  }
+
+  function countWrongAdd() {
+    setCountWrong(countWrong + 1);
+    setWrongAnswer(true);
+    setCorrectAnswer(false);
   }
 
   function guessChecker(guess) {
@@ -299,17 +331,15 @@ function App() {
     console.log(guess);
     let guessUppercase = guess.toUpperCase();
     console.log(guessUppercase);
-    if (guessUppercase === theCapital) setCountRight(countRight + 1);
-    else setCountWrong(countWrong + 1);
+    if (guessUppercase === theCapital) countRightAdd();
+    else countWrongAdd();
     setCapitalGuess("");
     handleResetCountry();
   }
 
   function handleSubmit(evt) {
     // evt.preventDefault();
-    if (capitalGuess.length > 1)
-      // test(capitalGuess)
-      guessChecker(capitalGuess);
+    if (capitalGuess.length > 1) guessChecker(capitalGuess);
     else alert("Input must be at least two characters.");
     console.log("inHandle Submit");
   }
@@ -321,8 +351,26 @@ function App() {
         <h1>GUESS THE CAPITAL</h1>
       </div>
       <div className="App-count-container">
-        <p className="App-count">Right Guesses: {countRight} </p>
-        <p className="App-count"> Wrong Guesses: {countWrong}</p>
+        <div>
+          <p className="App-count">
+            Right Guesses: {countRight}{" "}
+            <p className={`App-count-right-answer${correctAnswer}`}>
+              Yes, it is {lastCapitalNormalCase}
+            </p>{" "}
+          </p>{" "}
+        </div>
+
+        <div>
+          {" "}
+          <p className="App-count">
+            {" "}
+            Wrong Guesses: {countWrong}{" "}
+            <p className={`App-count-wrong-answer${wrongAnswer}`}>
+              No, it is {lastCapitalNormalCase}
+            </p>
+          </p>
+        </div>
+
         <div className="App-reset-container">
           <button className="App-button-reset" onClick={handleResetScores}>
             reset scores
@@ -331,7 +379,11 @@ function App() {
       </div>
 
       <div className="App-main">
-        <GetAPI place={theCountry} addCapital={addCapital} />
+        <GetAPI
+          place={theCountry}
+          addCapital={addCapital}
+          addCapitalNormalCase={addCapitalNormalCase}
+        />
 
         <div className="App-main-guess">
           <div className="App-main-guess-question">

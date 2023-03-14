@@ -18,6 +18,37 @@
   margin: 0;
 }
 
+.App-count-right-answer {
+  &true {
+    opacity: 1;
+    color: green;
+    padding-left: 3rem;
+  }
+  &false {
+    opacity: 0;
+    color: green;
+    padding-left: 3rem;
+  }
+}
+
+.App-count-wrong-answer {
+  &true {
+    opacity: 1;
+    color: red;
+    padding-left: 3rem;
+  }
+
+  &false {
+    opacity: 0;
+    color: red;
+    padding-left: 3rem;
+  }
+}
+
+.App-answer-change {
+  opacity: 1;
+}
+
 .App-reset-container {
 }
 
