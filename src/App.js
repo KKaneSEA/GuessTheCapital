@@ -373,7 +373,7 @@ function App() {
 
         <div className="App-reset-container">
           <button className="App-button-reset" onClick={handleResetScores}>
-            reset scores
+            Reset Scores
           </button>
         </div>
       </div>
@@ -387,14 +387,15 @@ function App() {
 
         <div className="App-main-guess">
           <div className="App-main-guess-question">
-            <p>What is the capital of {theCountry}?</p>
+            <p className="App-main-guess-p">
+              What is the capital of {theCountry}?
+            </p>
           </div>
           <div className="App-main-guess-input">
             <input
               type="text"
-              placeholder="guess the Capital..."
+              placeholder="Guess the Capital..."
               value={capitalGuess}
-              // name="capitalInput"
               onChange={handleChange}
               className="App-guess-input"
               onKeyDown={(e) => {

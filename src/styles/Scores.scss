@@ -6,6 +6,15 @@
   justify-content: center;
   padding-left: 5rem;
   background-color: $greenbackground;
+
+  @media only screen and (max-width: $bp-large) {
+    padding-left: 6rem;
+  }
+
+  @media only screen and (max-width: $bp-smallest) {
+    padding-left: 1rem;
+    justify-content: flex-start;
+  }
 }
 
 .App-count {
@@ -13,35 +22,80 @@
   font-weight: 300;
   font-size: 3rem;
   display: flex;
-  align-items: center;
+  //align-items: center;
   justify-content: flex-start;
   margin: 0;
+
+  @media only screen and (max-width: $bp-large) {
+    font-size: 2.5rem;
+  }
+
+  @media only screen and (max-width: $bp-medium) {
+    padding-left: 2rem;
+    font-size: 2rem;
+  }
+
+  @media only screen and (max-width: $bp-small) {
+    padding-left: 0;
+    font-size: 1.5rem;
+  }
+
+  @media only screen and (max-width: $bp-smallest) {
+    font-size: 1rem;
+  }
 }
 
 .App-count-right-answer {
   &true {
+    display: flex;
+    margin: 0;
     opacity: 1;
     color: green;
     padding-left: 3rem;
+    @media only screen and (max-width: $bp-smallest) {
+      font-size: 1rem;
+      padding-left: 1.5rem;
+    }
   }
   &false {
+    display: flex;
+    margin: 0;
     opacity: 0;
     color: green;
     padding-left: 3rem;
+
+    @media only screen and (max-width: $bp-smallest) {
+      font-size: 1rem;
+      padding-left: 1.5rem;
+    }
   }
 }
 
 .App-count-wrong-answer {
   &true {
+    display: flex;
+    margin: 0;
     opacity: 1;
+    color: red;
+    padding-left: 3rem;
+
+    @media only screen and (max-width: $bp-smallest) {
+      font-size: 1rem;
+      padding-left: 1.5rem;
+    }
+  }
+
+  &false {
+    display: flex;
+    margin: 0;
+    opacity: 0;
     color: red;
     padding-left: 3rem;
   }
 
-  &false {
-    opacity: 0;
-    color: red;
-    padding-left: 3rem;
+  @media only screen and (max-width: $bp-smallest) {
+    font-size: 1rem;
+    padding-left: 1.5rem;
   }
 }
 
@@ -50,6 +104,19 @@
 }
 
 .App-reset-container {
+  @media only screen and (max-width: $bp-medium) {
+    padding-left: 2rem;
+  }
+
+  @media only screen and (max-width: $bp-small) {
+    padding-left: 0;
+    font-size: 1.5rem;
+  }
+
+  @media only screen and (max-width: $bp-smallest) {
+    padding-left: 1rem;
+    justify-content: flex-start;
+  }
 }
 
 .App-button-reset {
@@ -57,4 +124,9 @@
   font-weight: 300;
   font-size: 1rem;
   margin-top: 1rem;
+
+  @media only screen and (max-width: $bp-smallest) {
+    font-size: 0.7rem;
+    font-weight: 400;
+  }
 }
