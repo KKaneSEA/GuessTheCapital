@@ -1,5 +1,5 @@
 import { useState, useEffect } from "react";
-//import "./App.css";
+
 import Test from "./Test";
 import GetAPI from "./GetAPI";
 import "./styles/Body.scss";
@@ -347,28 +347,28 @@ function App() {
   return (
     <div className="App-container">
       {/* <Test countWrong={countWrong} /> */}
-      <div className="App-title">
+      <header className="App-title">
         <h1>GUESS THE CAPITAL</h1>
-      </div>
+      </header>
       <div className="App-count-container">
         <div>
-          <p className="App-count">
+          <div className="App-count">
             Right Guesses: {countRight}{" "}
             <p className={`App-count-right-answer${correctAnswer}`}>
               Yes, it is {lastCapitalNormalCase}
             </p>{" "}
-          </p>{" "}
+          </div>{" "}
         </div>
 
         <div>
           {" "}
-          <p className="App-count">
+          <div className="App-count">
             {" "}
             Wrong Guesses: {countWrong}{" "}
             <p className={`App-count-wrong-answer${wrongAnswer}`}>
               No, it is {lastCapitalNormalCase}
             </p>
-          </p>
+          </div>
         </div>
 
         <div className="App-reset-container">
@@ -405,7 +405,6 @@ function App() {
                   console.log(capitalGuess);
 
                   handleSubmit();
-                  //handleResetCountry();
                 }
               }}
             ></input>
@@ -413,11 +412,7 @@ function App() {
               className="App-guess-button"
               onClick={(e) => {
                 handleSubmit();
-
-                // handleResetCountry();
               }}
-
-              // onClick={handleSubmit}
             >
               Submit
             </button>{" "}

@@ -38,6 +38,7 @@
 .App-guess-button {
   font-family: "Sono", sans-serif;
   font-weight: 300;
+  -webkit-appearance: none;
 
   @media only screen and (max-width: $bp-smallest) {
     font-weight: 400;
