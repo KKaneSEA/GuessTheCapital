@@ -8,8 +8,13 @@ import "./styles/Scores.scss";
 import "./styles/Main.scss";
 
 function App() {
-  const [countRight, setCountRight] = useState(0);
-  const [countWrong, setCountWrong] = useState(0);
+  const initialRight =
+    JSON.parse(window.localStorage.getItem("countRight")) || 0;
+  const initialWrong =
+    JSON.parse(window.localStorage.getItem("countWrong")) || 0;
+  const [countRight, setCountRight] = useState(initialRight);
+  const [countWrong, setCountWrong] = useState(initialWrong);
+
   const [capitalGuess, setCapitalGuess] = useState("");
   const [theCapital, setTheCapital] = useState("");
   const [theCapitalNormalCase, setTheCapitalNormalCase] = useState("");
@@ -17,6 +22,14 @@ function App() {
   const [theCountry, setTheCountry] = useState("Australia");
   const [correctAnswer, setCorrectAnswer] = useState(false);
   const [wrongAnswer, setWrongAnswer] = useState(false);
+
+  useEffect(() => {
+    window.localStorage.setItem("countRight", JSON.stringify(countRight));
+  }, [countRight]);
+
+  useEffect(() => {
+    window.localStorage.setItem("countWrong", JSON.stringify(countWrong));
+  }, [countWrong]);
 
   let places = [
     "Afghanistan",
@@ -270,11 +283,6 @@ function App() {
 
   function addCapital(correctCapital) {
     setTheCapital(correctCapital);
-
-    // this.setState(
-    //   { friends: [...this.state.friends, newFriend] },
-    //   this.syncLocalStorage
-    // );
   }
 
   function addCapitalNormalCase(capitalNormalCase) {
@@ -338,7 +346,6 @@ function App() {
   }
 
   function handleSubmit(evt) {
-    // evt.preventDefault();
     if (capitalGuess.length > 1) guessChecker(capitalGuess);
     else alert("Input must be at least two characters.");
     console.log("inHandle Submit");
@@ -346,7 +353,6 @@ function App() {
 
   return (
     <div className="App-container">
-      {/* <Test countWrong={countWrong} /> */}
       <header className="App-title">
         <h1>GUESS THE CAPITAL</h1>
       </header>
