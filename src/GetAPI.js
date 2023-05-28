@@ -7,20 +7,25 @@ function GetAPI(props) {
 
   useEffect(() => {
     async function getData() {
-      const url = await axios.get(
-        `https://restcountries.com/v3.1/name/${props.place}?fullText=true`
-      );
-      let response = url;
-      let capital = response.data[0].capital[0];
-      let capitalUppercase = capital.toUpperCase();
-      console.log(response.data[0].capital[0]);
-      console.log(capital);
-      console.log(capitalUppercase);
-      setCorrectCapital(capitalUppercase);
-      //this.setState({ correctCapital: capitalUppercase });
-      props.addCapital(capitalUppercase);
-      props.addCapitalNormalCase(capital);
+      try {
+        const url = await axios.get(
+          `https://restcountries.com/v3.1/name/${props.place}?fullText=true`
+        );
+
+        let response = url;
+        let capital = response.data[0].capital[0];
+        let capitalUppercase = capital.toUpperCase();
+
+        console.log(capitalUppercase);
+        setCorrectCapital(capitalUppercase);
+
+        props.addCapital(capitalUppercase);
+        props.addCapitalNormalCase(capital);
+      } catch (err) {
+        alert("The server of this API is down");
+      }
     }
+
     getData();
   }, [props.place]);
 

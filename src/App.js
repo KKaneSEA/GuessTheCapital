@@ -335,10 +335,8 @@ function App() {
   }
 
   function guessChecker(guess) {
-    console.log("in guess checker");
-    console.log(guess);
     let guessUppercase = guess.toUpperCase();
-    console.log(guessUppercase);
+
     if (guessUppercase === theCapital) countRightAdd();
     else countWrongAdd();
     setCapitalGuess("");
@@ -348,7 +346,6 @@ function App() {
   function handleSubmit(evt) {
     if (capitalGuess.length > 1) guessChecker(capitalGuess);
     else alert("Input must be at least two characters.");
-    console.log("inHandle Submit");
   }
 
   return (
@@ -362,7 +359,7 @@ function App() {
             Right Guesses: {countRight}{" "}
             <p className={`App-count-right-answer${correctAnswer}`}>
               Yes, it is {lastCapitalNormalCase}
-            </p>{" "}
+            </p>
           </div>{" "}
         </div>
 
@@ -400,6 +397,8 @@ function App() {
           <div className="App-main-guess-input">
             <input
               type="text"
+              autoComplete="none"
+              aria-autocomplete="none"
               placeholder="Guess the Capital..."
               value={capitalGuess}
               onChange={handleChange}
@@ -407,9 +406,6 @@ function App() {
               onKeyDown={(e) => {
                 let x = e.code;
                 if (x === "Enter") {
-                  console.log("enter submitted");
-                  console.log(capitalGuess);
-
                   handleSubmit();
                 }
               }}
