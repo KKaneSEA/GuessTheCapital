@@ -397,7 +397,7 @@ function App() {
           <div className="App-main-guess-input">
             <input
               type="text"
-              autoComplete="none"
+              autoComplete="new-password"
               aria-autocomplete="none"
               placeholder="Guess the Capital..."
               value={capitalGuess}
