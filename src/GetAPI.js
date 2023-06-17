@@ -14,7 +14,12 @@ function GetAPI(props) {
 
         let response = url;
         let capital = response.data[0].capital[0];
-        let capitalUppercase = capital.toUpperCase();
+        console.log(capital);
+        let capitalUppercase = capital
+          .toUpperCase()
+          .normalize("NFD")
+          .replace(/[\u0300-\u036f]/g, "")
+          .replace(/\.|\,/g, "");
 
         console.log(capitalUppercase);
         setCorrectCapital(capitalUppercase);

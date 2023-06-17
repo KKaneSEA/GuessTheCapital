@@ -19,7 +19,7 @@ function App() {
   const [theCapital, setTheCapital] = useState("");
   const [theCapitalNormalCase, setTheCapitalNormalCase] = useState("");
   const [lastCapitalNormalCase, setLastCapitalNormalCase] = useState("");
-  const [theCountry, setTheCountry] = useState("Australia");
+  const [theCountry, setTheCountry] = useState("Paraguay");
   const [correctAnswer, setCorrectAnswer] = useState(false);
   const [wrongAnswer, setWrongAnswer] = useState(false);
 
@@ -335,7 +335,7 @@ function App() {
   }
 
   function guessChecker(guess) {
-    let guessUppercase = guess.toUpperCase();
+    let guessUppercase = guess.toUpperCase().replace(/\.|\,/g, "");
 
     if (guessUppercase === theCapital) countRightAdd();
     else countWrongAdd();
