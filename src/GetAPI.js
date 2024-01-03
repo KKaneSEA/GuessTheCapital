@@ -12,22 +12,26 @@ function GetAPI(props) {
           `https://restcountries.com/v3.1/name/${props.place}?fullText=true`
         );
 
-        let response = url;
-        let capital = response.data[0].capital[0];
-        console.log(capital);
+        // let response = url;
+        // let capital = response.data[0].capital[0];
+
+        let capital = url.data[0].capital[0];
+
+        console.log(url.data[0].capital[0]);
+        // console.log(response.data[0].capital[0]);
         let capitalUppercase = capital
           .toUpperCase()
           .normalize("NFD")
           .replace(/[\u0300-\u036f]/g, "")
-          .replace(/\.|\,/g, "");
+          .replace(/\.|\,|\'/g, "")
+          .replace(/\_|\-/g, " ");
 
-        console.log(capitalUppercase);
         setCorrectCapital(capitalUppercase);
 
         props.addCapital(capitalUppercase);
         props.addCapitalNormalCase(capital);
       } catch (err) {
-        alert("The server of this API is down");
+        alert("The API used in this project is down");
       }
     }
 

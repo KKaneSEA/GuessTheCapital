@@ -283,6 +283,7 @@ function App() {
 
   function addCapital(correctCapital) {
     setTheCapital(correctCapital);
+    console.log(theCapital);
   }
 
   function addCapitalNormalCase(capitalNormalCase) {
@@ -335,7 +336,11 @@ function App() {
   }
 
   function guessChecker(guess) {
-    let guessUppercase = guess.toUpperCase().replace(/\.|\,/g, "");
+    let guessUppercase = guess
+      .toUpperCase()
+      .replace(/\.|\,|\'/g, "")
+      .replace(/\_|\-/g, " ");
+    console.log(guessUppercase);
 
     if (guessUppercase === theCapital) countRightAdd();
     else countWrongAdd();
